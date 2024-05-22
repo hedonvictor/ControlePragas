@@ -1,5 +1,7 @@
+import 'package:controlepragas/pages/components/customDropdownButton.dart';
 import 'package:controlepragas/pages/components/dropdownComp.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class pestControl extends StatelessWidget {
   const pestControl({Key? key}) : super(key: key);
@@ -8,10 +10,15 @@ class pestControl extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          appBar: AppBar(
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(0),
+          child: AppBar(
             title: const Text('Dados da praga'),
           ),
-          body: const Center(
+        ),
+        body: Container(
+          color: const Color.fromARGB(255, 12, 20, 94),
+          child: const Center(
             child: Column(
               children: [
                 SizedBox(height: 100),
@@ -21,6 +28,7 @@ class pestControl extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 26,
+                    color: Colors.white,
                   ),
                 ),
                 SizedBox(height: 60),
@@ -29,6 +37,7 @@ class pestControl extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
+                    color: Colors.white,
                   ),
                 ),
                 DropdownButtonExample(),
@@ -38,12 +47,22 @@ class pestControl extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
+                    color: Colors.white,
                   ),
                 ),
-                DropdownButtonExample(),
+                CustomDropdownButton(options: [
+                  'Pequeno',
+                  'Grande',
+                ]),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [],
+                )
               ],
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

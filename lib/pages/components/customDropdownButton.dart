@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 
-const List<String> list = <String>[
-  'Selecione',
-  'Lagarta da Soja (Anticarsia)',
-  'Lagarta Falsa medideira (Chrysodeixis)',
-  'Lagarta das Vagens (Spodoptera spp)',
-  'Lagartas do grupo Heliothinae'
-];
+class CustomDropdownButton extends StatefulWidget {
+  final List<String> options;
 
-class DropdownButtonExample extends StatefulWidget {
-  const DropdownButtonExample({super.key});
+  const CustomDropdownButton({Key? key, required this.options})
+      : super(key: key);
 
   @override
-  State<DropdownButtonExample> createState() => _DropdownButtonExampleState();
+  State<CustomDropdownButton> createState() => _CustomDropdownButtonState();
 }
 
-class _DropdownButtonExampleState extends State<DropdownButtonExample> {
-  String dropdownValue = list.first;
+class _CustomDropdownButtonState extends State<CustomDropdownButton> {
+  late String dropdownValue;
+
+  @override
+  void initState() {
+    super.initState();
+    dropdownValue = widget.options.first;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class _DropdownButtonExampleState extends State<DropdownButtonExample> {
           dropdownValue = value!;
         });
       },
-      items: list.map<DropdownMenuItem<String>>((String value) {
+      items: widget.options.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
