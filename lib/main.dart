@@ -1,3 +1,4 @@
+import 'package:controlepragas/pages/defoliationControl.dart';
 import 'package:controlepragas/pages/home.dart';
 import 'package:controlepragas/pages/pestControl.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: pestControl(),
+      home: Defoliationcontrol(),
     );
   }
 }
