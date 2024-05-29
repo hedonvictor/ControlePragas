@@ -1,13 +1,12 @@
-import 'package:controlepragas/pages/components/customDropdownButtonDefoli.dart';
+import 'package:controlepragas/pages/components/dropdownCompDisease.dart';
+import 'package:controlepragas/pages/components/dropdownCompPredator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:controlepragas/pages/components/dropdownComp.dart';
-import 'package:controlepragas/pages/components/customDropdownButton.dart';
 import 'package:controlepragas/pages/components/dropdownCompDefoli.dart';
 
-class Defoliationcontrol extends StatelessWidget {
-  const Defoliationcontrol({Key? key}) : super(key: key);
+class Predator extends StatelessWidget {
+  const Predator({Key? key}) : super(key: key);
 
   void enviar() {
     print('Enviar');
@@ -24,18 +23,19 @@ class Defoliationcontrol extends StatelessWidget {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(0),
           child: AppBar(
-            title: const Text('Dados da praga'),
+            title: const Text('Dados da doença'),
           ),
         ),
         body: Container(
+          padding: const EdgeInsets.all(50.0),
           color: const Color.fromARGB(255, 12, 20, 94),
           child: Center(
             child: Column(
               children: [
-                const SizedBox(height: 140),
+                const SizedBox(height: 100),
                 const Text(
-                  "     Informe os dados\n"
-                  "sobre o desfolhemanto:",
+                  "   Informe os dados\n"
+                  "sobre os predadores:",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 26,
@@ -44,30 +44,14 @@ class Defoliationcontrol extends StatelessWidget {
                 ),
                 const SizedBox(height: 60),
                 const Text(
-                  "Selecione o desfolhamento",
+                  "Selecione o predador",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                     color: Colors.white,
                   ),
                 ),
-                const DropDownButtonDefoliation(),
-                const SizedBox(height: 40),
-                const Text(
-                  "Selecione a fase",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.white,
-                  ),
-                ),
-                Container(
-                  width: 250,
-                  child: const CustomDropdownButtonDefoli(options: [
-                    'Ninfa (3º ao 5º instar)',
-                    'Adulto',
-                  ]),
-                ),
+                const DropdownButtonPredator(),
                 const SizedBox(height: 40),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   ElevatedButton(
@@ -89,7 +73,7 @@ class Defoliationcontrol extends StatelessWidget {
                   ),
                 ]),
                 const SizedBox(
-                  height: 110,
+                  height: 200,
                 ),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,

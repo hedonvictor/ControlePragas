@@ -11,11 +11,11 @@ class pestControl extends StatelessWidget {
   const pestControl({Key? key}) : super(key: key);
 
   void enviar() {
-    print('Enviar');
+    print('Voltar');
   }
 
   void voltar() {
-    print('Voltar');
+    print('Continuar');
   }
 
   @override
@@ -33,7 +33,7 @@ class pestControl extends StatelessWidget {
           child: Center(
             child: Column(
               children: [
-                const SizedBox(height: 100),
+                const SizedBox(height: 150),
                 const Text(
                   "Informe os dados\n"
                   "   sobre a praga:",
@@ -74,28 +74,30 @@ class pestControl extends StatelessWidget {
                   ElevatedButton(
                     onPressed: enviar,
                     child: const Text(
-                      "Enviar",
+                      "  Enviar  ",
+                      style: TextStyle(fontSize: 18),
                     ),
                   ),
                   const SizedBox(
                     width: 25,
                   ),
                   ElevatedButton(
-                    onPressed: voltar,
+                    onPressed: () {},
                     child: const Text(
-                      "Voltar",
+                      "Continuar",
+                      style: TextStyle(fontSize: 18),
                     ),
                   ),
                 ]),
                 const SizedBox(
-                  height: 30,
+                  height: 110,
                 ),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
                       Icons.home,
-                      size: 50,
+                      size: 60,
                       color: Colors.white,
                     ),
                     SizedBox(
@@ -103,7 +105,7 @@ class pestControl extends StatelessWidget {
                     ),
                     Icon(
                       Icons.account_circle_rounded,
-                      size: 50,
+                      size: 60,
                       color: Colors.white,
                     ),
                     SizedBox(
@@ -111,11 +113,11 @@ class pestControl extends StatelessWidget {
                     ),
                     Icon(
                       Icons.notifications_active_rounded,
-                      size: 50,
+                      size: 60,
                       color: Colors.white,
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),
