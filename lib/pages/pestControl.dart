@@ -1,22 +1,10 @@
-import 'dart:ui';
-
 import 'package:controlepragas/pages/components/customDropdownButton.dart';
-import 'package:controlepragas/pages/components/customTextButton.dart';
 import 'package:controlepragas/pages/components/dropdownComp.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class pestControl extends StatelessWidget {
   const pestControl({Key? key}) : super(key: key);
-
-  void enviar() {
-    print('Voltar');
-  }
-
-  void voltar() {
-    print('Continuar');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +18,11 @@ class pestControl extends StatelessWidget {
         ),
         body: Container(
           color: const Color.fromARGB(255, 12, 20, 94),
-          child: Center(
+          child: const Center(
             child: Column(
               children: [
-                const SizedBox(height: 150),
-                const Text(
+                SizedBox(height: 100),
+                Text(
                   "Informe os dados\n"
                   "   sobre a praga:",
                   style: TextStyle(
@@ -43,8 +31,8 @@ class pestControl extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 60),
-                const Text(
+                SizedBox(height: 60),
+                Text(
                   "Selecione a Praga",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -52,9 +40,9 @@ class pestControl extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                const DropdownButtonExample(),
-                const SizedBox(height: 40),
-                const Text(
+                DropdownButtonExample(),
+                SizedBox(height: 40),
+                Text(
                   "Selecione o tamanho",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -62,62 +50,14 @@ class pestControl extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                Container(
-                  width: 270,
-                  child: const CustomDropdownButton(options: [
-                    'Pequeno',
-                    'Grande',
-                  ]),
-                ),
-                const SizedBox(height: 40),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  ElevatedButton(
-                    onPressed: enviar,
-                    child: const Text(
-                      "  Enviar  ",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 25,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "Continuar",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
+                CustomDropdownButton(options: [
+                  'Pequeno',
+                  'Grande',
                 ]),
-                const SizedBox(
-                  height: 110,
-                ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.home,
-                      size: 60,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    Icon(
-                      Icons.account_circle_rounded,
-                      size: 60,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    Icon(
-                      Icons.notifications_active_rounded,
-                      size: 60,
-                      color: Colors.white,
-                    ),
-                  ],
-                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [],
+                )
               ],
             ),
           ),

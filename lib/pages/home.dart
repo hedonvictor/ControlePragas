@@ -6,28 +6,32 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      appBar: AppBar(
+        title: const Text("Controle de pragas"),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 134),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print("Lorem");
+        },
+        child: const Icon(Icons.calendar_today),
+      ),
+      body: Padding(
           padding: const EdgeInsets.all(50.0),
-          color: const Color.fromARGB(255, 12, 20, 94),
           child: Column(
             children: [
-              const SizedBox(
-                height: 100,
-              ),
               const Text(
                 "Bem Vindo(a)",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 28,
-                  color: Colors.white,
+                  fontSize: 18,
                 ),
               ),
               const Text(
                 "Vamos começar!",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 28,
-                  color: Colors.white,
+                  fontSize: 18,
                 ),
               ),
               const SizedBox(height: 28),
@@ -37,7 +41,7 @@ class Home extends StatelessWidget {
                 onPressed: () {},
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 255, 255, 255)), // Cor de fundo verde
+                      Color.fromARGB(255, 237, 255, 133)), // Cor de fundo verde
                 ),
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -49,13 +53,8 @@ class Home extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               const TextField(
-                textAlign: TextAlign.center,
                 decoration: InputDecoration(
-                  labelText: 'Monitor:',
-                  alignLabelWithHint: true,
-                  labelStyle: TextStyle(
-                    color: Colors.white,
-                  ),
+                  labelText: 'monitor:',
                 ),
               ),
               const SizedBox(height: 16),
@@ -63,7 +62,7 @@ class Home extends StatelessWidget {
                 onPressed: () {},
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 255, 255, 255)), // Cor de fundo verde
+                      Color.fromARGB(255, 237, 255, 133)), // Cor de fundo verde
                 ),
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -78,7 +77,7 @@ class Home extends StatelessWidget {
                 onPressed: () {},
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 255, 255, 255)), // Cor de fundo verde
+                      Color.fromARGB(255, 237, 255, 133)), // Cor de fundo verde
                 ),
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -93,7 +92,7 @@ class Home extends StatelessWidget {
                 onPressed: () {},
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 255, 255, 255)),
+                      const Color.fromARGB(255, 237, 255, 133)),
                 ),
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.start,
