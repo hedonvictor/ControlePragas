@@ -1,4 +1,5 @@
 import 'package:controlepragas/pages/home.dart';
+import 'package:controlepragas/pages/pestControl.dart';
 import 'package:controlepragas/pages/selectRegion.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: SelectBoxScreen());
+    return const MaterialApp(home: Home());
   }
 }
