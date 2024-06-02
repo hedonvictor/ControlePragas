@@ -1,3 +1,4 @@
+import 'package:controlepragas/pages/components/customDropdownPoints.dart';
 import 'package:controlepragas/pages/components/dropdownCompDisease.dart';
 import 'package:controlepragas/pages/components/dropdownCompPredator.dart';
 import 'package:flutter/cupertino.dart';
@@ -52,7 +53,19 @@ class Predator extends StatelessWidget {
                   ),
                 ),
                 const DropdownButtonPredator(),
-                const SizedBox(height: 40),
+                const SizedBox(
+                  height: 30,
+                ),
+                const Text(
+                  "Pontos de Amostragem",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Colors.white,
+                  ),
+                ),
+                const Customdropdownpoints(),
+                const SizedBox(height: 30),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   ElevatedButton(
                     onPressed: voltar,
@@ -73,34 +86,47 @@ class Predator extends StatelessWidget {
                   ),
                 ]),
                 const SizedBox(
-                  height: 200,
+                  height: 95,
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.home,
-                      size: 60,
+                      size: 55,
                       color: Colors.white,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 30,
                     ),
-                    Icon(
+                    const Icon(
                       Icons.account_circle_rounded,
-                      size: 60,
+                      size: 55,
                       color: Colors.white,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 30,
                     ),
-                    Icon(
+                    const Icon(
                       Icons.notifications_active_rounded,
-                      size: 60,
+                      size: 55,
                       color: Colors.white,
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.save,
+                        size: 55,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        print('Salvar');
+                      }
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),

@@ -1,3 +1,4 @@
+import 'package:controlepragas/pages/components/customDropdownPoints.dart';
 import 'package:controlepragas/pages/components/dropdownCompDisease.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +52,18 @@ class Datadisease extends StatelessWidget {
                   ),
                 ),
                 const DropdownButtonDisiase(),
+                const SizedBox(
+                  height: 30,
+                ),
+                const Text(
+                  "Pontos de Amostragem",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Colors.white,
+                  ),
+                ),
+                const Customdropdownpoints(),
                 const SizedBox(height: 40),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   ElevatedButton(
@@ -72,34 +85,49 @@ class Datadisease extends StatelessWidget {
                   ),
                 ]),
                 const SizedBox(
-                  height: 200,
+                  height: 80,
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.home,
-                      size: 60,
+                      size: 55,
                       color: Colors.white,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 30,
                     ),
-                    Icon(
+                    const Icon(
                       Icons.account_circle_rounded,
-                      size: 60,
+                      size: 55,
                       color: Colors.white,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 30,
                     ),
-                    Icon(
+                    const Icon(
                       Icons.notifications_active_rounded,
-                      size: 60,
+                      size: 55,
                       color: Colors.white,
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.save,
+                        size: 55,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        print('Salvar');
+                      },
+                      splashColor: Colors.transparent, // Define a cor da "splash" como transparente
+                      highlightColor: Colors.transparent, // Define a cor do destaque como transparente
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),

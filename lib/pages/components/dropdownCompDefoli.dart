@@ -30,7 +30,7 @@ class _DropdownButtonExampleState extends State<DropDownButtonDefoliation> {
         height: 2,
         color: Colors.deepPurpleAccent,
       ),
-      dropdownColor: Colors.grey, //Cor de fundo
+      dropdownColor: Colors.blueGrey, //Cor de fundo
       borderRadius: BorderRadius.circular(8.0),
       onChanged: (String? value) {
         // This is called when the user selects an item.
