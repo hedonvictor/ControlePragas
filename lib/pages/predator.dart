@@ -9,14 +9,6 @@ import 'package:controlepragas/pages/components/dropdownCompDefoli.dart';
 class Predator extends StatelessWidget {
   const Predator({Key? key}) : super(key: key);
 
-  void enviar() {
-    print('Enviar');
-  }
-
-  void voltar() {
-    print('Continuar');
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -68,7 +60,9 @@ class Predator extends StatelessWidget {
                 const SizedBox(height: 30),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   ElevatedButton(
-                    onPressed: voltar,
+                  onPressed: () async {
+                    Navigator.of(context).pushNamed('/dataDisease');
+                  },
                     child: const Text(
                       "   Voltar   ",
                       style: TextStyle(fontSize: 18),
@@ -78,7 +72,9 @@ class Predator extends StatelessWidget {
                     width: 25,
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                  onPressed: () async {
+                    Navigator.of(context).pushNamed('/');
+                  },
                     child: const Text(
                       "Continuar",
                       style: TextStyle(fontSize: 18),

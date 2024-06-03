@@ -12,22 +12,6 @@ import 'package:flutter/widgets.dart';
 class pestControl extends StatelessWidget {
   const pestControl({Key? key}) : super(key: key);
 
-  void enviar() {
-    print('Voltar');
-  }
-
-  void adicionar() {
-    print('Adicionar');
-  }
-
-  void voltar() {
-    print('Continuar');
-  }
-
-  void salvar() {
-    print('Salvar');
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -98,7 +82,9 @@ class pestControl extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center, 
                   children: [
                     ElevatedButton(
-                      onPressed: enviar,
+                  onPressed: () async {
+                    Navigator.of(context).pushNamed('/selectRegion');
+                  },
                       child: const Text(
                         "  Voltar  ",
                         style: TextStyle(fontSize: 18),
@@ -108,7 +94,9 @@ class pestControl extends StatelessWidget {
                       width: 30,
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                  onPressed: () async {
+                    Navigator.of(context).pushNamed('/defoliationControl');
+                  },
                       child: const Text(
                         "Continuar",
                         style: TextStyle(fontSize: 18),
