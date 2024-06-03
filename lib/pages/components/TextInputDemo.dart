@@ -14,20 +14,20 @@ class _TextInputDemoState extends State<TextInputDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Text Input Demo'),
+        title: const Text('Text Input Demo'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             TextField(
               controller: _controller,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Enter your text',
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
                 // Use the text from the input
@@ -37,7 +37,7 @@ class _TextInputDemoState extends State<TextInputDemo> {
                 // Clear the input field
                 _controller.clear();
               },
-              child: Text('Submit'),
+              child: const Text('Submit'),
             ),
           ],
         ),

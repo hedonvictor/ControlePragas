@@ -8,12 +8,14 @@ class SelectBoxScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
+
+        title: const Center(
           child: Text('Selecione a Calamidade:'),
         ),
       ),
-      body: Padding(
+      body: Container(
         padding: const EdgeInsets.all(50.0),
+        color: const Color.fromARGB(255, 12, 20, 94),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -44,6 +46,61 @@ class SelectBoxScreen extends StatelessWidget {
               onChanged: (bool value) {
                 print('Predadores: $value');
               },
+            ),
+
+            const SizedBox(height: 40),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    Navigator.of(context).pushNamed('/');
+                  },
+                  child: const Text(
+                    "   Voltar   ",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+                const SizedBox(
+                  width: 25,
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    Navigator.of(context).pushNamed('/pestControl');
+                  },
+                  child: const Text(
+                    "Continuar",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 110),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.home,
+                  size: 60,
+                  color: Colors.white,
+                ),
+                SizedBox(
+                  width: 30,
+                ),
+                Icon(
+                  Icons.account_circle_rounded,
+                  size: 60,
+                  color: Colors.white,
+                ),
+                SizedBox(
+                  width: 30,
+                ),
+                Icon(
+                  Icons.notifications_active_rounded,
+                  size: 60,
+                  color: Colors.white,
+                ),
+              ],
             ),
           ],
         ),

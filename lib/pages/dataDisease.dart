@@ -1,14 +1,11 @@
-import 'dart:ui';
-
-import 'package:controlepragas/pages/components/customDropdownButton.dart';
-import 'package:controlepragas/pages/components/customTextButton.dart';
-import 'package:controlepragas/pages/components/dropdownComp.dart';
+import 'package:controlepragas/pages/components/dropdownCompDisease.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:controlepragas/pages/components/dropdownCompDefoli.dart';
 
-class pestControl extends StatelessWidget {
-  const pestControl({Key? key}) : super(key: key);
+class Datadisease extends StatelessWidget {
+  const Datadisease({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,18 +14,19 @@ class pestControl extends StatelessWidget {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(0),
           child: AppBar(
-            title: const Text('Dados da praga'),
+            title: const Text('Dados da doença'),
           ),
         ),
         body: Container(
+          padding: const EdgeInsets.all(50.0),
           color: const Color.fromARGB(255, 12, 20, 94),
           child: Center(
             child: Column(
               children: [
-                const SizedBox(height: 150),
+                const SizedBox(height: 100),
                 const Text(
                   "Informe os dados\n"
-                  "   sobre a praga:",
+                  " sobre a doença:",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 26,
@@ -37,38 +35,22 @@ class pestControl extends StatelessWidget {
                 ),
                 const SizedBox(height: 60),
                 const Text(
-                  "Selecione a Praga",
+                  "Selecione a doença",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                     color: Colors.white,
                   ),
                 ),
-                const DropdownButtonExample(),
-                const SizedBox(height: 40),
-                const Text(
-                  "Selecione o tamanho",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.white,
-                  ),
-                ),
-                Container(
-                  width: 270,
-                  child: const CustomDropdownButton(options: [
-                    'Pequeno',
-                    'Grande',
-                  ]),
-                ),
+                const DropdownButtonDisiase(),
                 const SizedBox(height: 40),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   ElevatedButton(
                   onPressed: () async {
-                    Navigator.of(context).pushNamed('/selectRegion');
+                    Navigator.of(context).pushNamed('/defoliationControl');
                   },
                     child: const Text(
-                      "  Voltar  ",
+                      "   Voltar   ",
                       style: TextStyle(fontSize: 18),
                     ),
                   ),
@@ -77,7 +59,7 @@ class pestControl extends StatelessWidget {
                   ),
                   ElevatedButton(
                   onPressed: () async {
-                    Navigator.of(context).pushNamed('/defoliationControl');
+                    Navigator.of(context).pushNamed('/predators');
                   },
                     child: const Text(
                       "Continuar",
@@ -86,7 +68,7 @@ class pestControl extends StatelessWidget {
                   ),
                 ]),
                 const SizedBox(
-                  height: 110,
+                  height: 200,
                 ),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -113,7 +95,7 @@ class pestControl extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ],
-                ),
+                )
               ],
             ),
           ),

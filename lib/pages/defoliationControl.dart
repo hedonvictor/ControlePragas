@@ -1,14 +1,13 @@
-import 'dart:ui';
-
-import 'package:controlepragas/pages/components/customDropdownButton.dart';
-import 'package:controlepragas/pages/components/customTextButton.dart';
-import 'package:controlepragas/pages/components/dropdownComp.dart';
+import 'package:controlepragas/pages/components/customDropdownButtonDefoli.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:controlepragas/pages/components/dropdownComp.dart';
+import 'package:controlepragas/pages/components/customDropdownButton.dart';
+import 'package:controlepragas/pages/components/dropdownCompDefoli.dart';
 
-class pestControl extends StatelessWidget {
-  const pestControl({Key? key}) : super(key: key);
+class Defoliationcontrol extends StatelessWidget {
+  const Defoliationcontrol({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +24,10 @@ class pestControl extends StatelessWidget {
           child: Center(
             child: Column(
               children: [
-                const SizedBox(height: 150),
+                const SizedBox(height: 140),
                 const Text(
-                  "Informe os dados\n"
-                  "   sobre a praga:",
+                  "     Informe os dados\n"
+                  "sobre o desfolhemanto:",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 26,
@@ -37,17 +36,17 @@ class pestControl extends StatelessWidget {
                 ),
                 const SizedBox(height: 60),
                 const Text(
-                  "Selecione a Praga",
+                  "Selecione o desfolhamento",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                     color: Colors.white,
                   ),
                 ),
-                const DropdownButtonExample(),
+                const DropDownButtonDefoliation(),
                 const SizedBox(height: 40),
                 const Text(
-                  "Selecione o tamanho",
+                  "Selecione a fase",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -55,20 +54,20 @@ class pestControl extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 270,
-                  child: const CustomDropdownButton(options: [
-                    'Pequeno',
-                    'Grande',
+                  width: 250,
+                  child: const CustomDropdownButtonDefoli(options: [
+                    'Ninfa (3º ao 5º instar)',
+                    'Adulto',
                   ]),
                 ),
                 const SizedBox(height: 40),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   ElevatedButton(
                   onPressed: () async {
-                    Navigator.of(context).pushNamed('/selectRegion');
+                    Navigator.of(context).pushNamed('/pestControl');
                   },
                     child: const Text(
-                      "  Voltar  ",
+                      "   Voltar   ",
                       style: TextStyle(fontSize: 18),
                     ),
                   ),
@@ -77,7 +76,7 @@ class pestControl extends StatelessWidget {
                   ),
                   ElevatedButton(
                   onPressed: () async {
-                    Navigator.of(context).pushNamed('/defoliationControl');
+                    Navigator.of(context).pushNamed('/dataDisease');
                   },
                     child: const Text(
                       "Continuar",
@@ -113,7 +112,7 @@ class pestControl extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ],
-                ),
+                )
               ],
             ),
           ),
