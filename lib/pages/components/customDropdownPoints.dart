@@ -2,20 +2,26 @@ import 'package:flutter/material.dart';
 
 const List<String> list = <String>[
   'Selecione',
-  'Calosoma Granulatum',
-  'Callida Sp.',
-  'Callida Scutellaris',
-  'Lebia Concinna'
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '10'
 ];
 
-class DropdownButtonPredator extends StatefulWidget {
-  const DropdownButtonPredator({super.key});
+class Customdropdownpoints extends StatefulWidget {
+  const Customdropdownpoints({super.key});
 
   @override
-  State<DropdownButtonPredator> createState() => _DropdownButtonExampleState();
+  State<Customdropdownpoints> createState() => _DropdownButtonExampleState();
 }
 
-class _DropdownButtonExampleState extends State<DropdownButtonPredator> {
+class _DropdownButtonExampleState extends State<Customdropdownpoints> {
   String dropdownValue = list.first;
 
   @override

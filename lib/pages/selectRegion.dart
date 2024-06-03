@@ -19,6 +19,7 @@ class SelectBoxScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 150,),
             CheckboxWithText(
               text: 'Pragas',
               initialValue: false,
@@ -75,33 +76,46 @@ class SelectBoxScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 110),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.home,
-                  size: 60,
-                  color: Colors.white,
+            const SizedBox(height: 180),
+            Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.home,
+                      size: 55,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    const Icon(
+                      Icons.account_circle_rounded,
+                      size: 55,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    const Icon(
+                      Icons.notifications_active_rounded,
+                      size: 55,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.save,
+                        size: 55,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        print('Salvar');
+                      }
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: 30,
-                ),
-                Icon(
-                  Icons.account_circle_rounded,
-                  size: 60,
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  width: 30,
-                ),
-                Icon(
-                  Icons.notifications_active_rounded,
-                  size: 60,
-                  color: Colors.white,
-                ),
-              ],
-            ),
           ],
         ),
       ),

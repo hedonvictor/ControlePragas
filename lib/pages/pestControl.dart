@@ -1,10 +1,12 @@
 import 'dart:ui';
 
 import 'package:controlepragas/pages/components/customDropdownButton.dart';
+import 'package:controlepragas/pages/components/customDropdownPoints.dart';
 import 'package:controlepragas/pages/components/customTextButton.dart';
 import 'package:controlepragas/pages/components/dropdownComp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 class pestControl extends StatelessWidget {
@@ -25,7 +27,7 @@ class pestControl extends StatelessWidget {
           child: Center(
             child: Column(
               children: [
-                const SizedBox(height: 150),
+                const SizedBox(height: 100),
                 const Text(
                   "Informe os dados\n"
                   "   sobre a praga:",
@@ -45,7 +47,7 @@ class pestControl extends StatelessWidget {
                   ),
                 ),
                 const DropdownButtonExample(),
-                const SizedBox(height: 40),
+                const SizedBox(height: 30),
                 const Text(
                   "Selecione o tamanho",
                   style: TextStyle(
@@ -61,56 +63,84 @@ class pestControl extends StatelessWidget {
                     'Grande',
                   ]),
                 ),
-                const SizedBox(height: 40),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  ElevatedButton(
+                const SizedBox(
+                  height: 30,
+                ),
+                const Text(
+                  "Pontos de Amostragem",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Colors.white,
+                  ),
+                ),
+                const Customdropdownpoints(),
+                const SizedBox(
+                  height: 40,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center, 
+                  children: [
+                    ElevatedButton(
                   onPressed: () async {
                     Navigator.of(context).pushNamed('/selectRegion');
                   },
-                    child: const Text(
-                      "  Voltar  ",
-                      style: TextStyle(fontSize: 18),
+                      child: const Text(
+                        "  Voltar  ",
+                        style: TextStyle(fontSize: 18),
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 25,
-                  ),
-                  ElevatedButton(
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    ElevatedButton(
                   onPressed: () async {
                     Navigator.of(context).pushNamed('/defoliationControl');
                   },
-                    child: const Text(
-                      "Continuar",
-                      style: TextStyle(fontSize: 18),
+                      child: const Text(
+                        "Continuar",
+                        style: TextStyle(fontSize: 18),
+                      ),
                     ),
-                  ),
-                ]),
-                const SizedBox(
-                  height: 110,
+                  ]
                 ),
-                const Row(
+                const SizedBox(height: 50),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.home,
-                      size: 60,
+                      size: 55,
                       color: Colors.white,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 30,
                     ),
-                    Icon(
+                    const Icon(
                       Icons.account_circle_rounded,
-                      size: 60,
+                      size: 55,
                       color: Colors.white,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 30,
                     ),
-                    Icon(
+                    const Icon(
                       Icons.notifications_active_rounded,
-                      size: 60,
+                      size: 55,
                       color: Colors.white,
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.save,
+                        size: 55,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        print('Salvar');
+                      }
                     ),
                   ],
                 ),
