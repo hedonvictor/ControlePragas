@@ -2,10 +2,11 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:controlepragas/Entities/report_entity.dart';
 
-class DatabaseHelper {
-  static final DatabaseHelper _instance = DatabaseHelper._internal();
 
-  factory DatabaseHelper() => _instance;
+class DatabaseHelper {
+  static final DatabaseHelper instance = DatabaseHelper._internal();
+
+  factory DatabaseHelper() => instance;
 
   DatabaseHelper._internal();
 
@@ -13,11 +14,11 @@ class DatabaseHelper {
 
   Future<Database> get database async {
     if (_database != null) return _database!;
-    _database = await _initDatabase();
+    _database = await initDatabase();
     return _database!;
   }
 
-  Future<Database> _initDatabase() async {
+  Future<Database> initDatabase() async {
     final databasePath = await getDatabasesPath();
     final path = join(databasePath, 'app_database.db');
 
@@ -57,7 +58,6 @@ class DatabaseHelper {
         reportId INTEGER NOT NULL,
         nome TEXT NOT NULL,
         pontosDeAmostragem INTEGER NOT NULL,
-        tamanho TEXT NOT NULL,
         FOREIGN KEY (reportId) REFERENCES ReportEntity (id) ON DELETE CASCADE
       )
     ''');
@@ -68,7 +68,7 @@ class DatabaseHelper {
         reportId INTEGER NOT NULL,
         nome TEXT NOT NULL,
         pontosDeAmostragem INTEGER NOT NULL,
-        tamanho TEXT NOT NULL,
+        estagio TEXT NOT NULL,
         FOREIGN KEY (reportId) REFERENCES ReportEntity (id) ON DELETE CASCADE
       )
     ''');
@@ -79,7 +79,6 @@ class DatabaseHelper {
         reportId INTEGER NOT NULL,
         nome TEXT NOT NULL,
         pontosDeAmostragem INTEGER NOT NULL,
-        tamanho TEXT NOT NULL,
         FOREIGN KEY (reportId) REFERENCES ReportEntity (id) ON DELETE CASCADE
       )
     ''');

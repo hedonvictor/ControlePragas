@@ -7,14 +7,6 @@ import 'package:controlepragas/pages/components/dropdownCompDefoli.dart';
 class Datadisease extends StatelessWidget {
   const Datadisease({Key? key}) : super(key: key);
 
-  void enviar() {
-    print('Enviar');
-  }
-
-  void voltar() {
-    print('Continuar');
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -54,7 +46,9 @@ class Datadisease extends StatelessWidget {
                 const SizedBox(height: 40),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   ElevatedButton(
-                    onPressed: voltar,
+                  onPressed: () async {
+                    Navigator.of(context).pushNamed('/defoliationControl');
+                  },
                     child: const Text(
                       "   Voltar   ",
                       style: TextStyle(fontSize: 18),
@@ -64,7 +58,9 @@ class Datadisease extends StatelessWidget {
                     width: 25,
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                  onPressed: () async {
+                    Navigator.of(context).pushNamed('/predators');
+                  },
                     child: const Text(
                       "Continuar",
                       style: TextStyle(fontSize: 18),

@@ -4,25 +4,17 @@ import './components/SelectedBox.dart';
 class SelectBoxScreen extends StatelessWidget {
   const SelectBoxScreen({super.key});
 
-  void enviar() {
-    print('Enviar');
-  }
-
-  void voltar() {
-    print('Voltar');
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
+        title: const Center(
           child: Text('Selecione a Calamidade:'),
         ),
       ),
       body: Container(
-          padding: const EdgeInsets.all(50.0),
-          color: const Color.fromARGB(255, 12, 20, 94),
+        padding: const EdgeInsets.all(50.0),
+        color: const Color.fromARGB(255, 12, 20, 94),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -59,7 +51,9 @@ class SelectBoxScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: voltar,
+                  onPressed: () async {
+                    Navigator.of(context).pushNamed('/');
+                  },
                   child: const Text(
                     "   Voltar   ",
                     style: TextStyle(fontSize: 18),
@@ -69,7 +63,9 @@ class SelectBoxScreen extends StatelessWidget {
                   width: 25,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    Navigator.of(context).pushNamed('/pestControl');
+                  },
                   child: const Text(
                     "Continuar",
                     style: TextStyle(fontSize: 18),
@@ -106,6 +102,7 @@ class SelectBoxScreen extends StatelessWidget {
             ),
           ],
         ),
-     ),);
-}
+      ),
+    );
+  }
 }
