@@ -8,6 +8,7 @@ class SelectBoxScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         title: const Center(
           child: Text('Selecione a Calamidade:'),
         ),
@@ -46,6 +47,7 @@ class SelectBoxScreen extends StatelessWidget {
                 print('Predadores: $value');
               },
             ),
+
             const SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

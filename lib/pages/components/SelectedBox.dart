@@ -38,6 +38,7 @@ class _CheckboxWithTextState extends State<CheckboxWithText> {
           },
         ),
         Text(widget.text),
-     ],);
-}
+      ],
+    );
+  }
 }

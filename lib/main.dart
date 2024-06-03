@@ -14,6 +14,7 @@ void main() async {
   
   await DatabaseHelper.instance.initDatabase();
 
+
   runApp(const MainApp());
 }
 
