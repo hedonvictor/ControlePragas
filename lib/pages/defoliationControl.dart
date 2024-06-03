@@ -1,14 +1,58 @@
-import 'package:controlepragas/pages/components/customDropdownButtonDefoli.dart';
-import 'package:controlepragas/pages/components/customDropdownPoints.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:controlepragas/pages/dataDisease.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:controlepragas/pages/components/dropdownComp.dart';
-import 'package:controlepragas/pages/components/customDropdownButton.dart';
-import 'package:controlepragas/pages/components/dropdownCompDefoli.dart';
 
-class Defoliationcontrol extends StatelessWidget {
-  const Defoliationcontrol({Key? key}) : super(key: key);
+import 'package:controlepragas/Entities/desfolhamento_entity.dart';
+import 'package:controlepragas/Entities/report_entity.dart';
+
+import 'package:controlepragas/Repository/conexao.dart';
+
+
+
+class Defoliationcontrol extends StatefulWidget {
+  final ReportEntity report;
+
+  const Defoliationcontrol({Key? key, required this.report}) : super(key: key);
+
+  @override
+  _DefoliationControlState createState() => _DefoliationControlState();
+}
+
+class _DefoliationControlState extends State<Defoliationcontrol> {
+  final List<String> _desfolhamentoOptions = [
+    'Selecione',
+    'Percevejo-verde(Nezera)',
+    'Percevejo-pequeno (Piezodorus)',
+    'Percevejo-marrom (Euschistus)',
+    'Percevejo-barriga-verde (Dichelops)'
+  ];
+
+  final List<String> _estagioOptions = [
+    'Ninfa (3º ao 5º instar)',
+    'Adulto',
+  ];
+  final List<int> _pontosOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  String? _selectedDesf;
+  String? _selectedEstagio;
+  int? _selectedPontos;
+  final List<DesfolhamentoEntity> _desfolhamentos = [];
+
+  void _addDesf() {
+    if (_selectedDesf != null &&
+        _selectedEstagio != null &&
+        _selectedPontos != null) {
+      final praga = DesfolhamentoEntity(
+        nome: _selectedDesf!,
+        estagio: _selectedEstagio!,
+        pontosDeAmostragem: _selectedPontos!,
+      );
+      setState(() {
+        _desfolhamentos.add(praga);
+      });
+      _selectedDesf = null;
+      _selectedEstagio = null;
+      _selectedPontos = null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +88,25 @@ class Defoliationcontrol extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                const DropDownButtonDefoliation(),
+                DropdownButton<String>(
+                  value: _selectedDesf,
+                  hint: const Text('Selecione o desfolhamento',
+                      style: TextStyle(color: Colors.white)),
+                  dropdownColor: const Color.fromARGB(255, 12, 20, 94),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _selectedDesf = newValue;
+                    });
+                  },
+                  items: _desfolhamentoOptions
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value,
+                          style: const TextStyle(color: Colors.white)),
+                    );
+                  }).toList(),
+                ),
                 const SizedBox(height: 30),
                 const Text(
                   "Selecione a fase",
@@ -54,12 +116,24 @@ class Defoliationcontrol extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                Container(
-                  width: 250,
-                  child: const CustomDropdownButtonDefoli(options: [
-                    'Ninfa (3º ao 5º instar)',
-                    'Adulto',
-                  ]),
+                DropdownButton<String>(
+                  value: _selectedEstagio,
+                  hint: const Text('Selecione o estagio',
+                      style: TextStyle(color: Colors.white)),
+                  dropdownColor: const Color.fromARGB(255, 12, 20, 94),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _selectedEstagio = newValue;
+                    });
+                  },
+                  items: _desfolhamentoOptions
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value,
+                          style: const TextStyle(color: Colors.white)),
+                    );
+                  }).toList(),
                 ),
                 const SizedBox(
                   height: 30,
@@ -72,13 +146,37 @@ class Defoliationcontrol extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                const Customdropdownpoints(),
+                DropdownButton<int>(
+                  value: _selectedPontos,
+                  hint: const Text('Selecione os Pontos',
+                      style: TextStyle(color: Colors.white)),
+                  dropdownColor: const Color.fromARGB(255, 12, 20, 94),
+                  onChanged: (int? newValue) {
+                    setState(() {
+                      _selectedPontos = newValue;
+                    });
+                  },
+                  items: _pontosOptions.map<DropdownMenuItem<int>>((int value) {
+                    return DropdownMenuItem<int>(
+                      value: value,
+                      child: Text(value.toString(),
+                          style: const TextStyle(color: Colors.white)),
+                    );
+                  }).toList(),
+                ),
+                ElevatedButton(
+                  onPressed: _addDesf,
+                  child: const Text(
+                    "Adicionar",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
                 const SizedBox(height: 40),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).pushNamed('/pestControl');
-                  },
+                    onPressed: () async {
+                      Navigator.of(context).pushNamed('/pestControl');
+                    },
                     child: const Text(
                       "   Voltar   ",
                       style: TextStyle(fontSize: 18),
@@ -88,9 +186,14 @@ class Defoliationcontrol extends StatelessWidget {
                     width: 25,
                   ),
                   ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).pushNamed('/dataDisease');
-                  },
+                    onPressed: () {
+                      final updatedReport =
+                          widget.report.copyWith(desfolhamentos: _desfolhamentos);
+                      DatabaseHelper().insertReport(updatedReport);
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => DataDisease(report: updatedReport),
+                      ));
+                    },
                     child: const Text(
                       "Continuar",
                       style: TextStyle(fontSize: 18),
@@ -100,47 +203,6 @@ class Defoliationcontrol extends StatelessWidget {
                 const SizedBox(
                   height: 50,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.home,
-                      size: 55,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    const Icon(
-                      Icons.account_circle_rounded,
-                      size: 55,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    const Icon(
-                      Icons.notifications_active_rounded,
-                      size: 55,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.save,
-                        size: 55,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        print('Salvar');
-                      },
-                      splashColor: Colors.transparent, // Define a cor da "splash" como transparente
-                      highlightColor: Colors.transparent, // Define a cor do destaque como transparente
-                    ),
-                  ],
-                )
               ],
             ),
           ),

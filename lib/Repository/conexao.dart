@@ -2,7 +2,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:controlepragas/Entities/report_entity.dart';
 
-
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._internal();
 
@@ -37,7 +36,6 @@ class DatabaseHelper {
         propriedade TEXT NOT NULL,
         cultivo TEXT NOT NULL,
         data TEXT NOT NULL,
-        dataSemeadura TEXT NOT NULL
       )
     ''');
 
@@ -86,13 +84,12 @@ class DatabaseHelper {
 
   Future<void> insertReport(ReportEntity report) async {
     final db = await database;
-    
+
     int reportId = await db.insert('ReportEntity', {
       'monitor': report.monitor,
       'propriedade': report.propriedade,
       'cultivo': report.cultivo,
       'data': report.data.toIso8601String(),
-      'dataSemeadura': report.dataSemeadura.toIso8601String(),
     });
 
     for (var praga in report.pragas) {
@@ -129,7 +126,13 @@ class DatabaseHelper {
       });
     }
   }
+
+Future<List<ReportEntity>> getReports() async {
+  final Database db = await database;
+  final List<Map<String, dynamic>> maps = await db.query('ReportEntity');
+  return List.generate(maps.length, (i) {
+    return ReportEntity.fromMap(maps[i]);
+  });
 }
 
-
-
+}

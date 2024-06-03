@@ -1,13 +1,50 @@
-import 'package:controlepragas/pages/components/customDropdownPoints.dart';
-import 'package:controlepragas/pages/components/dropdownCompDisease.dart';
-import 'package:controlepragas/pages/components/dropdownCompPredator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:controlepragas/pages/components/dropdownCompDefoli.dart';
 
-class Predator extends StatelessWidget {
-  const Predator({Key? key}) : super(key: key);
+import 'package:controlepragas/pages/final.dart';
+
+//Entities
+import 'package:controlepragas/Entities/report_entity.dart';
+import 'package:controlepragas/Entities/predator_entity.dart';
+
+//DB
+import 'package:controlepragas/Repository/conexao.dart';
+
+class Predators extends StatefulWidget {
+  final ReportEntity report;
+
+  const Predators({Key? key, required this.report}) : super(key: key);
+
+  @override
+  _PredatorsState createState() => _PredatorsState();
+}
+
+class _PredatorsState extends State<Predators> {
+  final List<String> _predatorsOptions = [
+    'Calosoma Granulatum',
+    'Callida Sp.',
+    'Callida Scutellaris',
+    'Lebia Concinna',
+    'Aranhas',
+  ];
+
+  final List<int> _pontosOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  String? _selectedPredator;
+  int? _selectedPontos;
+  final List<PredatorEntity> _predators = [];
+
+  void _addPredator() {
+    if (_selectedPredator != null && _selectedPontos != null) {
+      final praga = PredatorEntity(
+        nome: _selectedPredator!,
+        pontosDeAmostragem: _selectedPontos!,
+      );
+      setState(() {
+        _predators.add(praga);
+      });
+      _selectedPredator = null;
+      _selectedPontos = null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +81,25 @@ class Predator extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                const DropdownButtonPredator(),
+                DropdownButton<String>(
+                  value: _selectedPredator,
+                  hint: const Text('Selecione o predador',
+                      style: TextStyle(color: Colors.white)),
+                  dropdownColor: const Color.fromARGB(255, 12, 20, 94),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _selectedPredator = newValue;
+                    });
+                  },
+                  items: _predatorsOptions
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value,
+                          style: const TextStyle(color: Colors.white)),
+                    );
+                  }).toList(),
+                ),
                 const SizedBox(
                   height: 30,
                 ),
@@ -56,13 +111,37 @@ class Predator extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                const Customdropdownpoints(),
+                DropdownButton<int>(
+                  value: _selectedPontos,
+                  hint: const Text('Selecione os Pontos',
+                      style: TextStyle(color: Colors.white)),
+                  dropdownColor: const Color.fromARGB(255, 12, 20, 94),
+                  onChanged: (int? newValue) {
+                    setState(() {
+                      _selectedPontos = newValue;
+                    });
+                  },
+                  items: _pontosOptions.map<DropdownMenuItem<int>>((int value) {
+                    return DropdownMenuItem<int>(
+                      value: value,
+                      child: Text(value.toString(),
+                          style: const TextStyle(color: Colors.white)),
+                    );
+                  }).toList(),
+                ),
+                ElevatedButton(
+                  onPressed: _addPredator,
+                  child: const Text(
+                    "Adicionar",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
                 const SizedBox(height: 30),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).pushNamed('/dataDisease');
-                  },
+                    onPressed: () async {
+                      Navigator.of(context).pushNamed('/dataDisease');
+                    },
                     child: const Text(
                       "   Voltar   ",
                       style: TextStyle(fontSize: 18),
@@ -72,56 +151,22 @@ class Predator extends StatelessWidget {
                     width: 25,
                   ),
                   ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).pushNamed('/');
-                  },
+                    onPressed: () {
+                      final updatedReport =
+                          widget.report.copyWith(predadores: _predators);
+                      DatabaseHelper().insertReport(updatedReport);
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ReportDetailsPage(report: updatedReport)
+                      ));
+                    },
                     child: const Text(
-                      "Continuar",
+                      "Finalizar",
                       style: TextStyle(fontSize: 18),
                     ),
                   ),
                 ]),
                 const SizedBox(
                   height: 95,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.home,
-                      size: 55,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    const Icon(
-                      Icons.account_circle_rounded,
-                      size: 55,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    const Icon(
-                      Icons.notifications_active_rounded,
-                      size: 55,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.save,
-                        size: 55,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        print('Salvar');
-                      }
-                    ),
-                  ],
                 ),
               ],
             ),

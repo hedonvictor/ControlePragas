@@ -1,12 +1,47 @@
-import 'package:controlepragas/pages/components/customDropdownPoints.dart';
-import 'package:controlepragas/pages/components/dropdownCompDisease.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:controlepragas/pages/components/dropdownCompDefoli.dart';
 
-class Datadisease extends StatelessWidget {
-  const Datadisease({Key? key}) : super(key: key);
+import 'package:controlepragas/pages/predator.dart';
+
+//ENTITIES
+import 'package:controlepragas/Entities/doenca_entity.dart';
+import 'package:controlepragas/Entities/report_entity.dart';
+//DB
+import 'package:controlepragas/Repository/conexao.dart';
+
+class DataDisease extends StatefulWidget {
+  final ReportEntity report;
+
+  const DataDisease({Key? key, required this.report}) : super(key: key);
+
+  @override
+  _DataDiseaseState createState() => _DataDiseaseState();
+}
+
+class _DataDiseaseState extends State<DataDisease> {
+  final List<String> _doencaOptions = [
+    'Selecione',
+    'Lagarta com Nomuraea (doença branca)',
+    'Lagarta com Baculovírus (doença preta)'
+  ];
+
+  final List<int> _pontosOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  String? _selectedDoenca;
+  int? _selectedPontos;
+  final List<DoencaEntity> _doencas = [];
+
+  void _addDoenca() {
+    if (_selectedDoenca != null && _selectedPontos != null) {
+      final praga = DoencaEntity(
+        nome: _selectedDoenca!,
+        pontosDeAmostragem: _selectedPontos!,
+      );
+      setState(() {
+        _doencas.add(praga);
+      });
+      _selectedDoenca = null;
+      _selectedPontos = null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +78,25 @@ class Datadisease extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                const DropdownButtonDisiase(),
+                DropdownButton<String>(
+                  value: _selectedDoenca,
+                  hint: const Text('Selecione a doenca',
+                      style: TextStyle(color: Colors.white)),
+                  dropdownColor: const Color.fromARGB(255, 12, 20, 94),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _selectedDoenca = newValue;
+                    });
+                  },
+                  items: _doencaOptions
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value,
+                          style: const TextStyle(color: Colors.white)),
+                    );
+                  }).toList(),
+                ),
                 const SizedBox(
                   height: 30,
                 ),
@@ -55,13 +108,37 @@ class Datadisease extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                const Customdropdownpoints(),
+                DropdownButton<int>(
+                  value: _selectedPontos,
+                  hint: const Text('Selecione os Pontos',
+                      style: TextStyle(color: Colors.white)),
+                  dropdownColor: const Color.fromARGB(255, 12, 20, 94),
+                  onChanged: (int? newValue) {
+                    setState(() {
+                      _selectedPontos = newValue;
+                    });
+                  },
+                  items: _pontosOptions.map<DropdownMenuItem<int>>((int value) {
+                    return DropdownMenuItem<int>(
+                      value: value,
+                      child: Text(value.toString(),
+                          style: const TextStyle(color: Colors.white)),
+                    );
+                  }).toList(),
+                ),
+                ElevatedButton(
+                  onPressed: _addDoenca,
+                  child: const Text(
+                    "Adicionar",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
                 const SizedBox(height: 40),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).pushNamed('/defoliationControl');
-                  },
+                    onPressed: () async {
+                      Navigator.of(context).pushNamed('/defoliationControl');
+                    },
                     child: const Text(
                       "   Voltar   ",
                       style: TextStyle(fontSize: 18),
@@ -71,9 +148,14 @@ class Datadisease extends StatelessWidget {
                     width: 25,
                   ),
                   ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).pushNamed('/predators');
-                  },
+                    onPressed: () {
+                      final updatedReport =
+                          widget.report.copyWith(doencas: _doencas);
+                      DatabaseHelper().insertReport(updatedReport);
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Predators(report: updatedReport),
+                      ));
+                    },
                     child: const Text(
                       "Continuar",
                       style: TextStyle(fontSize: 18),
@@ -82,47 +164,6 @@ class Datadisease extends StatelessWidget {
                 ]),
                 const SizedBox(
                   height: 80,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.home,
-                      size: 55,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    const Icon(
-                      Icons.account_circle_rounded,
-                      size: 55,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    const Icon(
-                      Icons.notifications_active_rounded,
-                      size: 55,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.save,
-                        size: 55,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        print('Salvar');
-                      },
-                      splashColor: Colors.transparent, // Define a cor da "splash" como transparente
-                      highlightColor: Colors.transparent, // Define a cor do destaque como transparente
-                    ),
-                  ],
                 ),
               ],
             ),

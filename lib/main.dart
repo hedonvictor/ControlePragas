@@ -28,11 +28,10 @@ class MainApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const Home(),
-        '/pestControl': (context) => const pestControl(),
-        '/defoliationControl': (context) => const Defoliationcontrol(),
-        '/selectRegion': (context) => const SelectBoxScreen(),
-        '/predators': (context) => const Predator(),
-        '/dataDisease': (context) => const Datadisease(),
+        // '/defoliationControl': (context) => const Defoliationcontrol(),
+        // '/selectRegion': (context) => const SelectBoxScreen(),
+        // '/predators': (context) => const Predator(),
+        // '/dataDisease': (context) => const Datadisease(),
       },
     );
   }

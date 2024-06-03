@@ -4,5 +4,5 @@ class DesfolhamentoEntity{
   final String estagio;
   
 
-  DesfolhamentoEntity({required this.nome, required this.pontosDeAmostragem, required this.estagio});
+  DesfolhamentoEntity({required this.nome, required this.estagio, required this.pontosDeAmostragem, });
 }

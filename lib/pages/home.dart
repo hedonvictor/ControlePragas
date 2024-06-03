@@ -1,8 +1,11 @@
-import 'package:controlepragas/Entities/report_entity.dart';
 import 'package:flutter/material.dart';
 
-import 'package:controlepragas/Repository/conexao.dart';
+import 'package:controlepragas/Entities/report_entity.dart';
 
+import 'package:controlepragas/pages/pestControl.dart';
+import 'package:controlepragas/pages/reportsPage.dart';
+
+import 'package:controlepragas/Repository/conexao.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -12,11 +15,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final TextEditingController _dataController = TextEditingController();
   final TextEditingController _monitorController = TextEditingController();
   final TextEditingController _propriedadeController = TextEditingController();
   final TextEditingController _cultivoController = TextEditingController();
-  final TextEditingController _dataSemeaduraController = TextEditingController();
 
   final DatabaseHelper dbHelper = DatabaseHelper();
 
@@ -47,15 +48,6 @@ class _HomeState extends State<Home> {
             ),
             const SizedBox(height: 28),
             TextField(
-              controller: _dataController,
-              textAlign: TextAlign.center,
-              decoration: const InputDecoration(
-                labelText: 'Data:',
-                alignLabelWithHint: true,
-                labelStyle: TextStyle(color: Colors.white),
-              ),
-            ),
-            TextField(
               controller: _monitorController,
               textAlign: TextAlign.center,
               decoration: const InputDecoration(
@@ -82,47 +74,45 @@ class _HomeState extends State<Home> {
                 labelStyle: TextStyle(color: Colors.white),
               ),
             ),
-            TextField(
-              controller: _dataSemeaduraController,
-              textAlign: TextAlign.center,
-              decoration: const InputDecoration(
-                labelText: 'Data da semeadura:',
-                alignLabelWithHint: true,
-                labelStyle: TextStyle(color: Colors.white),
-              ),
-            ),
             const SizedBox(height: 28),
             ElevatedButton(
-              onPressed: () async {
-                final data = DateTime.parse(_dataController.text);
+              onPressed: () {
+                // Capturar os valores dos TextFields
+                final data = DateTime.now();
                 final monitor = _monitorController.text;
                 final propriedade = _propriedadeController.text;
                 final cultivo = _cultivoController.text;
-                final dataSemeadura = DateTime.parse(_dataSemeaduraController.text);
 
+                // Criar uma instância de ReportEntity
                 final report = ReportEntity(
                   monitor: monitor,
                   propriedade: propriedade,
                   cultivo: cultivo,
                   data: data,
-                  dataSemeadura: dataSemeadura,
-                  pragas: [],  // Inicialmente vazio, pode ser preenchido conforme necessário
-                  doencas: [],  // Inicialmente vazio, pode ser preenchido conforme necessário
-                  desfolhamentos: [],  // Inicialmente vazio, pode ser preenchido conforme necessário
-                  predadores: []  // Inicialmente vazio, pode ser preenchido conforme necessário
+                  pragas: [],
+                  doencas: [],
+                  desfolhamentos: [],
+                  predadores: [],
                 );
-
-                // Inserir no banco de dados
-                await dbHelper.insertReport(report);
-
-                // Navegar para a próxima tela
-                Navigator.of(context).pushNamed('/selectRegion');
+                // Navegar para a próxima página para adicionar pragas
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => PestControl(report: report),
+                ));
               },
               child: const Text(
                 "Continuar",
                 style: TextStyle(fontSize: 18),
               ),
             ),
+            const SizedBox(height: 88),
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ReportsPage()));
+              },
+              icon: Icon(Icons.article_sharp),
+              iconSize: 70,
+            )
           ],
         ),
       ),
